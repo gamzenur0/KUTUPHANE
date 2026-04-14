@@ -32,17 +32,23 @@ namespace Kutuphane.Controllers
                 return View();
             }
 
-            
-            [HttpPost]
-            public IActionResult Add(Book newBook)
-            {
+
+        [HttpPost]
+        [ValidateAntiForgeryToken] 
+        public IActionResult Add(Book newBook)
+        {
+            if (ModelState.IsValid)
+            { 
                 _context.Books.Add(newBook);
                 _context.SaveChanges();
+                TempData["Success"] = "Kitap başarıyla eklendi!"; 
                 return RedirectToAction("Index");
             }
+            return View(newBook);
+        }
 
-            
-            [HttpGet]
+
+        [HttpGet]
             public IActionResult Update(int id)
             {
                 var book = _context.Books.Find(id);
@@ -53,17 +59,24 @@ namespace Kutuphane.Controllers
                 return View(book);
             }
 
-           
-            [HttpPost]
-            public IActionResult Update(Book updatedBook)
-            {
-                _context.Books.Update(updatedBook);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-      
-            public IActionResult Remove(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken] 
+        public IActionResult Update(Book updatedBook)
+        {
+            if (ModelState.IsValid) 
+            {
+                _context.Books.Update(updatedBook); 
+                _context.SaveChanges();             
+
+                TempData["SuccessMessage"] = "Kitap başarıyla güncellendi!"; 
+                return RedirectToAction("Index");   
+            }
+            return View(updatedBook);
+        }
+
+
+        public IActionResult Remove(int id)
             {
                 var book = _context.Books.Find(id);
                 if (book == null)

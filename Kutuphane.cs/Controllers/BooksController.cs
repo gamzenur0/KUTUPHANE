@@ -29,9 +29,9 @@ namespace Kutuphane.Controllers
             [HttpGet]
             public IActionResult Add()
             {
-            var kategoriler = 
+       
  
-            ViewBag.Categories = new SelectList(_context.Kategoriler.ToList(), "Id", "Name");
+            ViewBag.Kategoriler = new SelectList(_context.Kategoriler.ToList(), "Id", "Name");
             return View();
             }
 

@@ -21,15 +21,18 @@ namespace Kutuphane.Controllers
 
             public IActionResult Index()
             {
-                var books = _context.Books.ToList();
-                return View(books);
+            var kitaplar = _context.Books.Include(b => b.Kategori).ToList();
+            return View(kitaplar);
             }
 
             
             [HttpGet]
             public IActionResult Add()
             {
-                return View();
+            var kategoriler = 
+ 
+            ViewBag.Categories = new SelectList(_context.Kategoriler.ToList(), "Id", "Name");
+            return View();
             }
 
 

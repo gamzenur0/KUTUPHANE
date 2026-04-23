@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using KUTUPHANE.Models;
+using System.ComponentModel.DataAnnotations;
 namespace Kutuphane.cs.Models
 {
 
@@ -17,5 +18,7 @@ namespace Kutuphane.cs.Models
 
     [Range(0, 500, ErrorMessage = "Stok 0'dan küçük olamaz.")]
     public int Stock { get; set; }
+        public int KategoriId { get; set; }
+        public Kategori Kategori { get; set; }
     }
 }
